@@ -23,4 +23,49 @@ NFT contains the following information:
 
 ## Installation
 
-WIP
+### Build
+
+```bash
+cd program && cargo-build-sbf
+```
+
+### Validator
+
+To test the program with `solana-test-validator`:
+
+- First we have to start the validator
+- And then we have to configure the CLI Tool Suite to target the local cluster.
+
+```bash
+solana-test-validator
+```
+
+```bash
+solana config set --url http://127.0.0.1:8899
+```
+
+To verift the validator is running:
+
+```bash
+solana genesis hash
+```
+
+If the result matches the hash in `solana-test-validator` output, then the validator is running.
+
+### Deploy
+
+```bash
+solana program deploy ./target/deploy/nft.so
+```
+
+This will return the program id, which we will use to interact with the program.
+
+### Frontend Testing
+
+```bash
+cd program_client && yarn add @solana/spl-token ts-node
+```
+
+```bash
+yarn ts-node app.ts $program_id
+```
