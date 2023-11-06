@@ -36,17 +36,17 @@ pub fn transfer(
 	destination: &AccountInfo,
 	authority: &AccountInfo,
 ) -> ProgramResult {
-    // Implement your business logic here...
+	ticket.data.assoc_account = Some(*destination.key);
 
-
-
-	csl_spl_assoc_token::src::cpi::create(
-		for_create,
-	)?;
+	if assoc_token_account.lamports() == 0 {
+		csl_spl_assoc_token::src::cpi::create(
+			for_create,
+		)?;
+	}
 
 	csl_spl_token::src::cpi::transfer_checked(
 		for_transfer_checked,
-		Default::default(),
+		1,
 		Default::default(),
 	)?;
 

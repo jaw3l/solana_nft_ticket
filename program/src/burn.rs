@@ -27,13 +27,11 @@ pub fn burn(
 	owner: &AccountInfo,
 	wallet: &AccountInfo,
 ) -> ProgramResult {
-    // Implement your business logic here...
-
-
+	ticket.data.assoc_account = None;
 
 	csl_spl_token::src::cpi::burn(
 		for_burn,
-		Default::default(),
+		1,
 	)?;
 
 
